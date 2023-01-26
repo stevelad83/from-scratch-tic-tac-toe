@@ -1,10 +1,10 @@
 import './App.css';
 import Board from './components/Board.js';
-import { GameProvider } from './context/GameContext.js';
 
 function App() {
   return (
-    <div>
+    <div className="app">
+      <h1>Tic, Tac & Crosses</h1>
       <Board />
     </div>
   );
