@@ -7,7 +7,26 @@ const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
   const [board, setBoard] = useState(boardData);
-  return <GameContext.Provider value={{ board, setBoard }}>{children}</GameContext.Provider>;
+  const [currentPlayer, setCurrentPlayer] = useState('X');
+  const [gameMessage, setGameMessage] = useState('');
+  const [active, setActive] = useState(true);
+
+  return (
+    <GameContext.Provider
+      value={{
+        board,
+        setBoard,
+        currentPlayer,
+        setCurrentPlayer,
+        gameMessage,
+        setGameMessage,
+        active,
+        setActive,
+      }}
+    >
+      {children}
+    </GameContext.Provider>
+  );
 };
 
 const useGameContext = () => {
