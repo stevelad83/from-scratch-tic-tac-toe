@@ -10,10 +10,11 @@ const GameProvider = ({ children }) => {
   const [active, setActive] = useState(true);
 
   const handleClick = (space) => {
-    //
-    board[space] = { space: space, content: currentPlayer };
-    //switch current player
-    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    if (!board[space].content) {
+      board[space] = { space: space, content: currentPlayer };
+      //switch current player
+      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    }
   };
   return (
     <GameContext.Provider
