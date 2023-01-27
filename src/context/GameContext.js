@@ -10,6 +10,7 @@ const GameProvider = ({ children }) => {
   const [active, setActive] = useState(true);
 
   const handleClick = (space) => {
+    if (!active) return;
     if (!board[space].content) {
       board[space] = { space: space, content: currentPlayer };
       //switch current player
