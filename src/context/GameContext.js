@@ -1,8 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import boardData from '../board-data.js';
 
-console.log('boardData', boardData);
-
 const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
@@ -11,6 +9,12 @@ const GameProvider = ({ children }) => {
   const [gameMessage, setGameMessage] = useState('');
   const [active, setActive] = useState(true);
 
+  const handleClick = (space) => {
+    //
+    board[space] = { space: space, content: currentPlayer };
+    //switch current player
+    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+  };
   return (
     <GameContext.Provider
       value={{
@@ -22,6 +26,7 @@ const GameProvider = ({ children }) => {
         setGameMessage,
         active,
         setActive,
+        handleClick,
       }}
     >
       {children}
@@ -33,9 +38,5 @@ const useGameContext = () => {
   const context = useContext(GameContext);
   return context;
 };
-
-export function handleClick() {
-  console.log('I am being clicked');
-}
 
 export { GameProvider, useGameContext };
