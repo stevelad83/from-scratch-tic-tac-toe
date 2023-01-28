@@ -1,10 +1,11 @@
 import './App.css';
 import Board from './components/Board.js';
+import Header from './components/Header.js';
 
 function App() {
   return (
     <div className="app">
-      <h1>Tic, Tac & Crosses</h1>
+      <Header />
       <Board />
     </div>
   );

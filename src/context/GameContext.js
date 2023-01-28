@@ -33,8 +33,7 @@ const GameProvider = ({ children }) => {
       setGameMessage(`You win ${winner}!`);
       setActive(false);
     } else if (!boardContent.some((i) => i === '')) {
-      console.log('cats game');
-      setGameMessage('cats game');
+      setGameMessage('Cats game');
     }
   };
 
