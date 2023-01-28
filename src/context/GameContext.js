@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createContext, useContext, useState } from 'react';
 import boardData from '../board-data.js';
 
@@ -16,24 +17,27 @@ const GameProvider = ({ children }) => {
       //switch current player
       setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
       checkWinner(board);
+      setBoard(board);
     }
-    checkGameStatus();
   };
 
-  const checkGameStatus = () => {
+  const boardContent = [];
+  for (let box of board) {
+    boardContent.push(box.content);
+  }
+
+  const checkGameStatus = (board) => {
     if (!active) return;
     const winner = checkWinner(board);
     if (winner) {
-      console.log('win');
       setGameMessage(`You win ${winner}!`);
       setActive(false);
-    } else if (board[8].content === 'X') {
-      setGameMessage('cats game');
+    } else if (!boardContent.some((i) => i === '')) {
       console.log('cats game');
+      setGameMessage('cats game');
     }
   };
 
-  //call checkGameStatus
   return (
     <GameContext.Provider
       value={{
@@ -46,6 +50,7 @@ const GameProvider = ({ children }) => {
         active,
         setActive,
         handleClick,
+        checkGameStatus,
       }}
     >
       {children}
@@ -55,6 +60,9 @@ const GameProvider = ({ children }) => {
 
 const useGameContext = () => {
   const context = useContext(GameContext);
+  useEffect(() => {
+    context.checkGameStatus(context.board);
+  }, [context]);
   return context;
 };
 
