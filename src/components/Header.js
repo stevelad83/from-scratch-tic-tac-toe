@@ -1,5 +1,4 @@
 import React from 'react';
-import boardData from '../board-data.js';
 import { useGameContext } from '../context/GameContext.js';
 
 export default function Header() {
