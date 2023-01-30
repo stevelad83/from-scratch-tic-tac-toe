@@ -16,6 +16,7 @@ const GameProvider = ({ children }) => {
       board[space] = { space: space, content: currentPlayer };
       //switch current player
       setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+      yourTurnMessage();
       checkWinner(board);
       setBoard(board);
     }
@@ -34,6 +35,14 @@ const GameProvider = ({ children }) => {
       setActive(false);
     } else if (!boardContent.some((i) => i === '')) {
       setGameMessage('Cats game');
+    }
+  };
+
+  const yourTurnMessage = () => {
+    if (currentPlayer === 'O') {
+      setGameMessage("It's your turn, player X");
+    } else if (currentPlayer === 'X') {
+      setGameMessage("It's your turn,player 0");
     }
   };
 
